@@ -1,0 +1,91 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.propiedades {
+  margin-top: 5rem;
+  @include m.tablet {
+    margin-top: 15rem;
+  }
+  &__heading {
+    @include m.heading;
+  }
+  &__grid {
+    @include m.grid(1, 2rem);
+    @include m.tablet {
+      @include m.grid(3, 2rem);
+    }
+    @include m.desktopXL {
+      @include m.grid(4, 2rem);
+    }
+  }
+}
+.propiedad {
+  background-color: v.$blanco;
+  @for $i from 1 through 6 {
+    $imagen: "../img/propiedad_" + $i + ".webp";
+    &:nth-child(#{$i}) &__imagen {
+      background-image: linear-gradient(
+          to top,
+          transparentize(v.$negro, 1%) 0%,
+          transparentize(v.$negro, 0.3%) 100%
+        ),
+        url($imagen);
+    }
+  }
+  &__imagen {
+    aspect-ratio: 10 / 6;
+    background-size: cover;
+    background-size: auto 150%;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    overflow: hidden;
+  }
+  &__estado {
+    width: max-content;
+    padding: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background-color: v.$primario;
+    color: v.$blanco;
+    font-weight: 700;
+  }
+  &__contenido {
+    padding: 1rem;
+  }
+  &__nombre {
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: v.$primario;
+  }
+  &__precio {
+    margin: 0;
+    font-size: 2rem;
+  }
+  &__ubicacion {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  &__caracteristicas {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem 0;
+  }
+  &__item {
+    margin: 0;
+    color: lighten(v.$primario, 20);
+    font-size: 1.3rem;
+    span {
+      color: lighten(v.$primario, 20);
+    }
+  }
+  &__enlace{
+    @include m.boton(v.$primario, v.$blanco);
+    display: block;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-radius: 1rem;
+  }
+}
